@@ -1,0 +1,26 @@
+/* src/styles/Join.css */
+/* #join{
+    background-color: var(--gray-color); 
+} */
+.join-section {
+    background-color: var(--gray-color);
+    text-align: center;
+}
+.join-content {
+    max-width: 600px;
+    margin: 0 auto;
+}
+.join-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-top: 2rem;
+}
+.join-form input {
+    padding: 1rem;
+    border-radius: 5px;
+    border: 1px solid #555;
+    background: #333;
+    color: #fff;
+    font-family: var(--font-family);
+}

@@ -1,0 +1,82 @@
+/* src/styles/AdminLogin.css */
+/* Centered form card */
+.admin-login-form {
+  background: rgba(255, 255, 255, 0.9);
+  padding: 2.5rem 2rem;
+  border-radius: 1rem;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+  width: 320px;
+  text-align: center;
+  animation: fadeInUp 0.8s ease-out both;
+}
+
+/* Entrance animation */
+@keyframes fadeInUp {
+  from {
+    transform: translateY(30px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* Heading */
+.admin-login-form h2 {
+  margin-bottom: 1.5rem;
+  color: #2c3e50;
+  font-size: 1.75rem;
+  letter-spacing: 1px;
+}
+
+/* Inputs */
+.admin-login-form input {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  margin-bottom: 1rem;
+  border: none;
+  border-radius: 0.5rem;
+  background: #ecf0f1;
+  color: #2c3e50;
+  font-size: 1rem;
+  transition: background 0.3s, box-shadow 0.3s;
+}
+
+.admin-login-form input:focus {
+  background: #fff;
+  box-shadow: 0 0 0 3px rgba(76, 161, 175, 0.4);
+  outline: none;
+}
+
+/* Button */
+.admin-login-form button {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border: none;
+  border-radius: 0.5rem;
+  background: linear-gradient(135deg, #4ca1af 0%, #2c3e50 100%);
+  color: #fff;
+  font-size: 1rem;
+  cursor: pointer;
+  letter-spacing: 0.5px;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.admin-login-form button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.admin-login-form button:active {
+  transform: translateY(0);
+  box-shadow: none;
+}
+
+/* Responsive tweaks */
+@media (max-width: 360px) {
+  .admin-login-form {
+    width: 90%;
+    padding: 2rem 1.5rem;
+  }
+}

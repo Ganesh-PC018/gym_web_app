@@ -1,0 +1,122 @@
+### Java ###
+*.class
+*.jar
+*.war
+*.ear
+
+# Compiled source #
+target/
+build/
+out/
+
+# Logs #
+*.log
+logs/
+spring.log
+
+# Temp files #
+*.tmp
+*.swp
+*.bak
+*.orig
+*.rej
+*~
+
+# OS generated files #
+.DS_Store
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+### Maven ###
+.mvn/
+!**/src/main/**/target/
+!**/src/test/**/target/
+**/dependency-reduced-pom.xml
+**/release.properties
+**/buildNumber.properties
+**/.mvn/timing.properties
+**/target/
+mvnw
+mvnw.cmd
+
+### Gradle ###
+.gradle/
+build/
+!**/src/main/**/build/
+!**/src/test/**/build/
+gradle-app.setting
+gradlew
+gradlew.bat
+
+### Spring Tool Suite (STS) ###
+.apt_generated/
+.classpath
+.factorypath
+.project
+.settings/
+.springBeans
+.sts4-cache/
+
+### IntelliJ IDEA ###
+.idea/
+*.iws
+*.iml
+*.ipr
+out/
+
+### NetBeans ###
+/nbproject/private/
+/nbbuild/
+/dist/
+/nbdist/
+/.nb-gradle/
+
+### VS Code ###
+.vscode/
+
+### Linux / Mac / Windows ###
+*.sublime-workspace
+*.sublime-project
+*.sw?
+*.kate-swp
+*.directory
+*.bak
+*.tmp
+*.~*
+
+### Environment Files ###
+.env
+.env.*
+application-local.properties
+application-dev.properties
+application-test.properties
+application-prod.properties
+
+### Database ###
+*.h2.db
+*.mv.db
+*.trace.db
+
+### Testing ###
+test-output/
+cobertura.ser
+jacoco.exec
+*.ec
+
+### Others ###
+*.log
+*.lock
+*.pid
+*.seed
+*.gz
+*.zip
+
+# Ignore any secret keys or credentials
+*.key
+*.pem
+*.jks
+*.p12
+
+# ignore node_modules if any frontend integration
+node_modules/

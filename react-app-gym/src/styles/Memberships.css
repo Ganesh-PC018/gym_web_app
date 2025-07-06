@@ -1,0 +1,139 @@
+.memberships {
+  padding: 2rem;
+  text-align: center;
+  color: #fff;
+  background: linear-gradient(135deg, #1e272e, #2c3e50);
+  min-height: 100vh;
+  animation: fadeIn 1.5s ease-in-out;
+}
+
+.memberships h2 {
+  font-size: 2.5rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+  animation: slideDown 1s ease;
+}
+
+.membership-cards {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  margin-top: 2rem;
+  flex-wrap: wrap;
+}
+
+.card {
+  background: #2c3335;
+  padding: 2rem;
+  border-radius: 20px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
+  width: 320px;
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+}
+
+.card::before {
+  content: '';
+  position: absolute;
+  width: 140%;
+  height: 140%;
+  background: radial-gradient(circle, rgba(88,44,131,0.4), transparent);
+  top: -20%;
+  left: -20%;
+  transform: scale(0);
+  transition: transform 0.5s ease;
+  z-index: -1;
+}
+
+.card:hover::before {
+  transform: scale(1);
+}
+
+.card:hover {
+  transform: scale(1.05);
+  box-shadow: 0 12px 24px rgba(255, 255, 255, 0.2);
+}
+
+.card h3 {
+  font-size: 1.8rem;
+  color: #ffe600;
+  text-shadow: 1px 1px 5px black;
+  margin-bottom: 1rem;
+  animation: pulseText 2s infinite;
+}
+
+.card .price {
+  font-size: 2.2rem;
+  font-weight: bold;
+  margin: 1rem 0;
+  color: #00d2ff;
+  animation: scaleIn 0.8s ease;
+}
+
+.card ul {
+  list-style: none;
+  padding: 0;
+  text-align: left;
+}
+
+.card ul li {
+  margin-bottom: 0.6rem;
+  color: #ccc;
+  font-size: 1.05rem;
+}
+
+button.btn-secondary,
+button.btn-primary {
+  margin-top: 1rem;
+  padding: 0.6rem 1.5rem;
+  border: none;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.btn-secondary {
+  background: transparent;
+  border: 2px solid #3498db;
+  color: #3498db;
+}
+
+.btn-secondary:hover {
+  background: #3498db;
+  color: #fff;
+  transform: translateY(-2px);
+}
+
+.btn-primary {
+  background: #f39c12;
+  color: #fff;
+}
+
+.btn-primary:hover {
+  background: #e67e22;
+  transform: translateY(-2px);
+}
+
+/* Animation Keyframes */
+@keyframes fadeIn {
+  0% { opacity: 0; transform: translateY(20px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slideDown {
+  0% { transform: translateY(-50px); opacity: 0; }
+  100% { transform: translateY(0); opacity: 1; }
+}
+
+@keyframes pulseText {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+}
+
+@keyframes scaleIn {
+  0% { transform: scale(0.9); opacity: 0; }
+  100% { transform: scale(1); opacity: 1; }
+}

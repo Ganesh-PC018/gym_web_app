@@ -1,0 +1,285 @@
+/* src/components/admin/Admin.css */
+
+:root {
+  --admin-bg: #1e1e1e;
+  --sidebar-bg: #252526;
+  --primary-text: #cccccc;
+  --header-bg: #2d2d2d;
+  --accent-color: #007acc;
+  --card-bg: #2d2d2d;
+  --border-color: #444444;
+
+  --status-paid: #28a745;
+  --status-pending: #ffc107;
+  --status-overdue: #dc3545;
+  --status-active: #28a745;
+  --status-inactive: #6c757d;
+}
+
+body {
+  margin: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: var(--admin-bg);
+  color: var(--primary-text);
+}
+
+/* Layout */
+.admin-container {
+  display: flex;
+  min-height: 100vh;
+}
+
+.admin-sidebar {
+  width: 250px;
+  background-color: var(--sidebar-bg);
+  padding: 1.5rem 1rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.admin-sidebar h2 {
+  color: var(--accent-color);
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.admin-sidebar nav {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.admin-sidebar nav button {
+  background: none;
+  border: none;
+  color: var(--primary-text);
+  padding: 1rem;
+  text-align: left;
+  border-radius: 5px;
+  font-size: 1rem;
+  transition: background-color 0.2s;
+  cursor: pointer;
+}
+
+.admin-sidebar nav button:hover,
+.admin-sidebar nav button.active {
+  background-color: var(--accent-color);
+  color: #fff;
+}
+
+.admin-main-content {
+  flex: 1;
+  padding: 2rem;
+  overflow-y: auto;
+}
+
+/* Header */
+.admin-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.btn-add-member {
+  background-color: var(--accent-color);
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+}
+
+.btn-add-member:hover {
+  background-color: #005fa3;
+}
+
+/* Dashboard Cards */
+
+.stats-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.cards {
+  background-color: var(--card-bg);
+  padding: 1.5rem;
+  border-radius: 10px;
+  
+  border-left: 4px solid var(--accent-color);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  transition: transform 0.2s;
+}
+.trash-icon{
+  margin-right: 10px;
+  padding: 5px;
+}
+h1,h2,h3,h4,h5,h6,p{
+  background-color: inherit;
+}
+.card:hover {
+  transform: translateY(-4px);
+}
+
+.card h3 {
+  margin: 0 0 0.5rem;
+  font-size: 1rem;
+  color: #a0a0a0;
+}
+
+.card p {
+  margin: 0;
+  font-size: 2rem;
+  font-weight: bold;
+  color: #fff;
+}
+
+/* Forms */
+.add-member-form {
+  margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  max-width: 400px;
+}
+
+.add-member-form input,
+.add-member-form select {
+  padding: 12px;
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+  background-color: #1a1a1a;
+  color: #eee;
+}
+
+.add-member-form button {
+  padding: 12px;
+  background-color: var(--status-paid);
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.add-member-form button:hover {
+  background-color: #218838;
+}
+
+/* Table Styles */
+.details-table,
+.fees-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.details-table th,
+.details-table td,
+.fees-table th,
+.fees-table td {
+  padding: 1rem;
+  text-align: left;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.details-table th,
+.fees-table th {
+  color: #a0a0a0;
+  font-size: 0.9rem;
+  text-transform: uppercase;
+}
+
+/* Row highlighting */
+.fees-table tr.inactive-row {
+  background-color: #fcf8e3;
+  color: #8a6d3b;
+  font-style: italic;
+}
+
+.fees-table tr.inactive-row td {
+  background-color: transparent !important;
+}
+
+/* Status Badges */
+.status-badge {
+  padding: 6px 12px;
+  border-radius: 15px;
+  font-size: 0.8rem;
+  font-weight: bold;
+  color: white;
+  display: inline-block;
+  text-transform: capitalize;
+}
+
+.status-paid {
+  background-color: var(--status-paid);
+}
+
+.status-pending {
+  background-color: var(--status-pending);
+  color: #000;
+}
+
+.status-overdue {
+  background-color: var(--status-overdue);
+}
+
+.status-active {
+  background-color: var(--status-active);
+}
+
+.status-inactive {
+  background-color: var(--status-inactive);
+}
+
+/* Toggle Button */
+.status-toggle {
+  border: none;
+  padding: 8px 14px;
+  border-radius: 15px;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  width: 100px;
+  text-align: center;
+}
+
+.status-toggle:active {
+  transform: scale(0.95);
+}
+
+.status-toggle.status-paid {
+  background-color: var(--status-paid);
+}
+
+.status-toggle.status-not-paid {
+  background-color: var(--status-overdue);
+}
+
+/* Utilities */
+.search-bar {
+  width: 100%;
+  padding: 0.75rem;
+  margin-bottom: 1.5rem;
+  background-color: #2a2a2a;
+  border: 1px solid var(--border-color);
+  border-radius: 5px;
+  color: var(--primary-text);
+}
+
+.table-container {
+  overflow-x: auto;
+}
+
+.fees-table td .joining-date-tooltip {
+  display: block;
+  font-size: 0.75rem;
+  color: #999;
+}
