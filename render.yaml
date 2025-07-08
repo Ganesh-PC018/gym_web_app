@@ -1,5 +1,4 @@
 services:
-  # Service 1: PostgreSQL Database using Render's public image
   - name: gym-database
     type: pserv
     runtime: image
@@ -15,14 +14,12 @@ services:
       - key: POSTGRES_PASSWORD
         value: 4806
 
-  # Service 2: Spring Boot Backend (Java with Maven)
   - name: gym-backend
     type: web
     plan: free
-    runtime: java
+    runtime: docker
     rootDir: gymmanagement
-    buildCommand: ./mvnw clean install -DskipTests
-    startCommand: java -jar target/gymmanagement-0.0.1-SNAPSHOT.jar
+    dockerfilePath: Dockerfile
     healthCheckPath: /actuator/health
     envVars:
       - key: DB_URL
@@ -38,7 +35,6 @@ services:
       - key: MAIL_PASSWORD
         sync: false
 
-  # Service 3: React + Vite Frontend (served with 'serve')
   - name: gym-frontend
     type: web
     plan: free
