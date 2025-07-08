@@ -1,33 +1,36 @@
 services:
-  # Service 1: PostgreSQL Database
+  # Service 1: PostgreSQL Database using Render's public image
   - name: gym-database
     type: pserv
-    runtime: postgres
+    runtime: image
+    image:
+      url: postgres:15
     plan: free
-    startCommand: "" # required, even if blank for postgres
+    startCommand: "echo Starting PostgreSQL"
+    envVars:
+      - key: POSTGRES_DB
+        value: gym_app
+      - key: POSTGRES_USER
+        value: ganesh
+      - key: POSTGRES_PASSWORD
+        value: 4806
 
-  # Service 2: Spring Boot Backend
+  # Service 2: Spring Boot Backend (Java with Maven)
   - name: gym-backend
     type: web
-    runtime: docker # or use buildCommand if not dockerizing
-    rootDir: gymmanagement
     plan: free
+    runtime: java
+    rootDir: gymmanagement
     buildCommand: ./mvnw clean install -DskipTests
     startCommand: java -jar target/gymmanagement-0.0.1-SNAPSHOT.jar
     healthCheckPath: /actuator/health
     envVars:
       - key: DB_URL
-        fromDatabase:
-          name: gym-database
-          property: connectionString
+        value: jdbc:postgresql://gym-database:5432/gym_app
       - key: DB_USER
-        fromDatabase:
-          name: gym-database
-          property: user
+        value: ganesh
       - key: DB_PASSWORD
-        fromDatabase:
-          name: gym-database
-          property: password
+        value: 4806
       - key: SECRET_TOKEN_KEY
         sync: false
       - key: MAIL_USERNAME
@@ -35,17 +38,14 @@ services:
       - key: MAIL_PASSWORD
         sync: false
 
-  # Service 3: React Frontend as Node Web (for dynamic pricing)
+  # Service 3: React + Vite Frontend (served with 'serve')
   - name: gym-frontend
     type: web
+    plan: free
     runtime: node
     rootDir: react-app-gym
-    plan: free
     buildCommand: npm install && npm run build
     startCommand: npx serve -s dist
     envVars:
       - key: VITE_API_URL
-        fromService:
-          type: web
-          name: gym-backend
-          property: hostport
+        value: https://gym-backend.onrender.com
