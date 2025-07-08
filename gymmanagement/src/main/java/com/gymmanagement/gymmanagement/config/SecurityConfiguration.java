@@ -51,6 +51,7 @@ public class SecurityConfiguration {
                 .cors(withDefaults()) // ✅ enable CORS properly in Spring Security
                 .csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(auth -> auth
+                        .requestMatchers("/actuator/health").permitAll()
                         .requestMatchers( "/fees/**","/api/interested", "/admin-login", "/api/auth/login", "/api/auth/login/**", "/api/public/**","/api/login/check/").permitAll()
                         .requestMatchers("/api/payments/**", "/api/members/**", "/api/admin/**","/api/admin").hasRole("ADMIN")
                         .anyRequest().authenticated()
