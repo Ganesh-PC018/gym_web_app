@@ -1,27 +1,18 @@
-# render.yaml - A blueprint for deploying a Spring Boot + React monorepo
-
 services:
-  # Service 1: The PostgreSQL Database
-  # Render will create this for us, for free.
-  - type: pserv # pserv means "Private Service", perfect for a database
+  - type: pserv
     name: gym-database
-    env: postgres # Specifies the environment is PostgreSQL
-    plan: free # Use the free instance type
-    # Free databases on Render expire after 90 days.
+    env: postgres
+    plan: free
 
-  # Service 2: The Spring Boot Backend
   - type: web
     name: gym-backend
     env: java
-    rootDir: gymmanagement # The folder where the backend code is
-    plan: free # Use the free instance type
+    rootDir: gymmanagement
+    plan: free
     buildCommand: ./mvnw clean install -DskipTests
-    startCommand: java -jar target/gymmanagement-0.0.1-SNAPSHOT.jar # Check your .jar file name
+    startCommand: java -jar target/gymmanagement-0.0.1-SNAPSHOT.jar
     healthCheckPath: /actuator/health
     envVars:
-      # The following lines tell Render to get the database connection details
-      # from the 'gym-database' service we defined above and set them as
-      # environment variables for our backend.
       - key: DB_URL
         fromDatabase:
           name: gym-database
@@ -34,7 +25,6 @@ services:
         fromDatabase:
           name: gym-database
           property: password
-      # We will add the following secrets manually in the Render Dashboard
       - key: SECRET_TOKEN_KEY
         sync: false
       - key: MAIL_USERNAME
@@ -42,18 +32,15 @@ services:
       - key: MAIL_PASSWORD
         sync: false
 
-  # Service 3: The React Frontend (as a Static Site)
-  - type: static_site
+  - type: static
     name: gym-frontend
-    rootDir: react_app_gym # The folder where the frontend code is
+    rootDir: react-app-gym
     plan: free
     buildCommand: npm install && npm run build
-    publishDir: dist # The folder where Vite puts the built files
-    # The following line automatically sets the backend URL for our frontend
+    publishDir: dist
     envVars:
       - key: VITE_API_URL
         fromService:
           type: web
-          name: gym-backend # Must match the name of the backend service
+          name: gym-backend
           property: url
-
