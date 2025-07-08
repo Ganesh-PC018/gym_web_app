@@ -1,9 +1,10 @@
-import axios from "axios";
-
+import axiosWithToken from "../utils/axiosWithToken";
+// import axios from "axios";
+// const BASE_URL = `http://localhost:8080`
 export const addInterestedMember = async (memberDetails) =>{
-    return axios.post(`http://localhost:8080/interested`,memberDetails);
+    return axiosWithToken.post(`/api/interested`,memberDetails);
 }
 
 export const allInterstedMembers = async () =>{
-    return axios.get(`http://localhost:8080/interested`);
+    return axiosWithToken.get(`/api/interested`);
 }

@@ -4,15 +4,22 @@ import '../styles/Footer.css';
 
 const Footer = () => {
     return (
-        <footer id="contact" className="footer">
+        <footer id="contact" className="footer ">
             <div className="container footer-container">
                 <p>&copy; 2025 GYM-CRAZE. All Rights Reserved.</p>
-                <div className="social-links">
-                    <a href="#">Facebook</a>
-                    <a href="#">Instagram</a>
-                    <a href="#">Twitter</a>
+                <div className="d-flex social-links">
+                    <div>
+                        <i className="bi bi-facebook mx-2  fs-5"></i>
+                    </div>
+                    <div>
+                        <i className="bi bi-instagram mx-2 fs-5"></i>
+                    </div>
+                    <div>
+                        <i className="bi bi-twitter mx-2 fs-5"></i>
+                    </div>
                 </div>
             </div>
+
         </footer>
     );
 };

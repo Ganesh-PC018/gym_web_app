@@ -27,7 +27,7 @@ const FeesManager = () => {
     };
     fetchFees();
   }, []);
-
+  
   const handleChange = (type, value) => {
     // Allow empty input to clear the field, but treat it as 0 for validation
     const numericValue = value === '' ? '' : Number(value);

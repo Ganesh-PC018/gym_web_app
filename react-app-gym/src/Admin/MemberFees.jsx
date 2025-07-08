@@ -3,8 +3,16 @@ import React, { useEffect, useState } from 'react';
 import './Admin.css';
 import { getAllPayments, updatePaymentStatus } from '../service/PaymentService';
 
+
 const MemberFees = ({ members }) => {
     const [paymentsData, setPaymentsData] = useState({});
+    const formatDate = (dateString) => {
+        const date = new Date(dateString);
+        const day = date.getDate();
+        const month = date.toLocaleString('en-US', { month: 'long' }); // e.g., June
+        const year = date.getFullYear();
+        return `${day}/${month}/${year}`;
+    };
 
     useEffect(() => {
         const fetchPayments = async () => {
@@ -91,10 +99,10 @@ const MemberFees = ({ members }) => {
                         </tr>
                     </thead>
                     <tbody>
-                        {members.map((member,index) => {
+                        {members.map((member, index) => {
                             const joiningDate = new Date(member.joiningDate);
                             // Add a class to the row if the member is inactive
-                            
+
                             const rowClass = member.status === 'Inactive' ? 'inactive-row' : '';
 
                             return (
@@ -102,7 +110,7 @@ const MemberFees = ({ members }) => {
                                     <td>
                                         {member.name}
                                         <span className="joining-date-tooltip">
-                                            Joined: {joiningDate.toLocaleDateString()}
+                                            Joined:{formatDate(member.joiningDate)}
                                         </span>
                                     </td>
                                     {monthColumns.map(month => {
@@ -120,11 +128,11 @@ const MemberFees = ({ members }) => {
                                         }
 
                                         // If the member is inactive, disable the button
-                                        console.log("checK ",member);
+                                        console.log("checK ", member);
                                         if (member.status === false) {
                                             return <td key={month.toISOString()}><span className="status-badge status-na">INACTIVE</span></td>;
                                         }
-                                        
+
                                         const status = paymentsData[member.memberId]?.[monthKey] ?? "NOT PAID";
 
                                         return (

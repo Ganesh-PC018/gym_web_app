@@ -10,11 +10,11 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    z-index: 1050; /* Higher z-index for popups */
+    z-index: 1050;
     opacity: 0;
     visibility: hidden;
     transition: opacity 0.3s ease, visibility 0.3s ease;
-    padding: 20px; /* Add padding for small screens */
+    padding: 15px; /* Consistent padding for all screen sizes */
 }
 
 .form-popup-overlay.show {
@@ -24,8 +24,6 @@
 
 /* --- Form Container --- */
 .add-member-form-container {
-    /* background: #ffffff; */
-    /* color: #333; */
     padding: 30px 40px;
     border-radius: 16px;
     box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
@@ -37,16 +35,20 @@
     transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94), opacity 0.3s ease;
     
     /* SCROLLBAR FIX: Set max-height and make it scrollable */
-    max-height: 90vh; /* Max height is 90% of viewport height */
-    overflow-y: auto; /* Add scrollbar ONLY to the form if content overflows */
+    max-height: 90vh;
+    overflow-y: auto;
+
+    /* ENHANCEMENT: Added Firefox scrollbar styling for cross-browser consistency */
+    scrollbar-width: thin;
+    scrollbar-color: #888 #f1f1f1;
 }
 
-/* Custom scrollbar for a cleaner look */
+/* Custom WebKit scrollbar for a cleaner look */
 .add-member-form-container::-webkit-scrollbar {
     width: 8px;
 }
 .add-member-form-container::-webkit-scrollbar-track {
-    /* background: #f1f1f1; */
+    background: #f1f1f1;
     border-radius: 10px;
 }
 .add-member-form-container::-webkit-scrollbar-thumb {
@@ -56,7 +58,6 @@
 .add-member-form-container::-webkit-scrollbar-thumb:hover {
     background: #555;
 }
-
 
 .form-popup-overlay.show .add-member-form-container {
     transform: scale(1);
@@ -68,31 +69,31 @@
     position: absolute;
     top: 15px;
     right: 20px;
-    /* background: #f1f1f1; */
+    background: transparent;
     border: none;
     border-radius: 50%;
     width: 36px;
     height: 36px;
-    font-size: 1.5em;
+    font-size: 1.5rem;
     color: #bc6717;
     cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
     transition: background-color 0.3s ease, transform 0.3s ease;
+    z-index: 10; /* Ensure it's above scrolling content */
 }
 
 .close-btn:hover {
-    /* background-color: #e2e2e2; */
+    background-color: #f1f1f1;
     transform: rotate(90deg);
 }
 
 /* --- Form Heading --- */
 .add-member-form-container h2 {
     text-align: center;
-    /* color: #2c3e50; */
     margin-bottom: 25px;
-    font-size: 2em;
+    font-size: 2rem;
     font-weight: 700;
 }
 
@@ -103,23 +104,20 @@
     gap: 25px; /* Spacing between grid items */
 }
 
-/* Make certain form groups span both columns */
 .form-group.full-width {
     grid-column: 1 / -1; /* Span from the first to the last column */
 }
-
 
 /* --- Form Group & Input Styling (with Icons) --- */
 .form-group {
     display: flex;
     flex-direction: column;
-    position: relative; /* Needed for icon positioning */
+    position: relative;
 }
 
 .form-group label {
     margin-bottom: 8px;
     font-weight: 600;
-    /* color: #555; */
     font-size: 0.9em;
 }
 
@@ -127,43 +125,58 @@
     position: absolute;
     left: 15px;
     top: 42px; /* Adjust to vertically center with the input */
-    /* color: #aaa; */
+    color: #aaa;
     font-size: 1.2em;
-    pointer-events: none; /* Make icons non-interactive */
+    pointer-events: none;
+    transition: color 0.3s ease; /* ENHANCEMENT: Smooth color transition */
 }
 
 .add-member-form input[type="text"],
 .add-member-form input[type="email"],
 .add-member-form input[type="date"],
 .add-member-form select {
-    padding: 12px 15px 12px 45px; /* Left padding to make space for the icon */
+    padding: 12px 15px 12px 45px; /* Left padding for icon */
     border: 2px solid #ddd;
     border-radius: 10px;
     font-size: 1em;
-    /* color: #333; */
     width: 100%;
     box-sizing: border-box;
-    transition: border-color 0.3s ease, box-shadow 0.3s ease;
-    /* background-color: #fdfdfd; */
+    transition: border-color 0.3s ease, box-shadow 0.3s ease, transform 0.2s ease;
 }
 
+/* ENHANCEMENT: Interactive focus state for inputs and icons */
 .add-member-form input:focus,
 .add-member-form select:focus {
     border-color: #007bff;
     box-shadow: 0 0 0 4px rgba(0, 123, 255, 0.15);
     outline: none;
+    transform: translateY(-2px); /* Add a subtle "lift" effect */
 }
 
-/* Adjust select padding as it can't have pseudo-elements */
+.add-member-form input:focus + .bi {
+    color: #007bff; /* Change icon color on focus */
+}
+
+/* Adjust select padding as it doesn't have an icon */
 .add-member-form select {
-    padding-left: 15px; /* No icon for select, so normal padding */
+    padding-left: 15px;
+}
+
+/* BONUS: Add this class with JS for validation errors */
+.form-group.error input,
+.form-group.error select {
+    border-color: #dc3545; /* Red border for error */
+}
+
+.form-group.error .bi {
+    color: #dc3545; /* Red icon for error */
 }
 
 /* --- Submit Button --- */
 .submit-btn {
-    grid-column: 1 / -1; /* Make button span both columns */
+    grid-column: 1 / -1;
     background-image: linear-gradient(45deg, #28a745, #218838);
-    /* color: white; */
+    color: white;
     padding: 15px 20px;
     border: none;
     border-radius: 10px;
@@ -180,11 +193,18 @@
     box-shadow: 0 7px 20px rgba(40, 167, 69, 0.4);
 }
 
+/* ENHANCEMENT: Active state for a "pressed" feel */
+.submit-btn:active {
+    transform: translateY(0);
+    box-shadow: 0 4px 15px rgba(40, 167, 69, 0.25);
+}
+
 
 /* --- Responsive Mobile Design --- */
-@media (max-width: 768px) {
+@media (max-width: 488px) {
     .add-member-form {
-        grid-template-columns: 1fr; /* Stack to a single column on mobile */
+        grid-template-columns: 1fr; /* MOBILE FIX: Stack to a single column */
+        gap: 20px; /* MOBILE FIX: Reduce gap for smaller screens */
     }
 
     .form-group.full-width, .form-group {
@@ -192,10 +212,21 @@
     }
     
     .add-member-form-container {
-        padding: 25px;
+        padding: 25px 20px; /* MOBILE FIX: Adjust padding */
+        max-height: 85vh; /* Give a bit more vertical space if needed */
     }
 
     .add-member-form-container h2 {
-        font-size: 1.6em;
+        font-size: 1.6rem; /* MOBILE FIX: Reduce heading size */
+    }
+
+    /* MOBILE FIX: Slightly smaller text for inputs and labels on mobile */
+    .form-group label {
+        font-size: 0.85em;
+    }
+
+    .add-member-form input,
+    .add-member-form select {
+        font-size: 0.95em;
     }
 }

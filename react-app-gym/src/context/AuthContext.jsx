@@ -1,5 +1,4 @@
-// src/context/AuthContext.jsx
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext, useState, useEffect } from "react";
 
 const AuthContext = createContext();
 
@@ -9,14 +8,28 @@ export const AuthProvider = ({ children }) => {
     return storedAdmin ? JSON.parse(storedAdmin) : null;
   });
 
+  useEffect(() => {
+    // Sync admin on storage change (e.g., if logged out in another tab)
+    const handleStorageChange = () => {
+      const storedAdmin = localStorage.getItem("admin");
+      setAdmin(storedAdmin ? JSON.parse(storedAdmin) : null);
+    };
+
+    window.addEventListener("storage", handleStorageChange);
+    return () => window.removeEventListener("storage", handleStorageChange);
+  }, []);
+
   const login = (adminData) => {
-    setAdmin(adminData);
     localStorage.setItem("admin", JSON.stringify(adminData));
+    setAdmin(adminData);
   };
 
   const logout = () => {
     setAdmin(null);
     localStorage.removeItem("admin");
+    localStorage.removeItem("token");
+    localStorage.removeItem("role");
+    window.location.reload();
   };
 
   return (
@@ -26,4 +39,4 @@ export const AuthProvider = ({ children }) => {
   );
 };
 
-export const useAuth = () => useContext(AuthContext); // ✅ must be exported
+export const useAuth = () => useContext(AuthContext);

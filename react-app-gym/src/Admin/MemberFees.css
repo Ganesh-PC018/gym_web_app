@@ -1,23 +1,48 @@
 .status-badge {
-    padding: 4px 10px;
-    border-radius: 6px;
-    font-size: 0.8rem;
-    font-weight: bold;
-    text-transform: uppercase;
-    display: inline-block;
-    color: white;
+  padding: 4px 10px;
+  border-radius: 6px;
+  font-size: 0.8rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  display: inline-block;
+  color: white;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
 }
 
 .status-paid {
-    background-color: #28a745;
+  background-color: #28a745;
 }
+
 .status-pending {
-    background-color: #ffc107;
+  background-color: #ffc107;
+  color: #000;
 }
+
 .status-overdue {
-    background-color: #dc3545;
+  background-color: #dc3545;
 }
+
 .status-disabled {
-    color: #ccc;
-    font-size: 0.8rem;
+  color: #ccc;
+  font-size: 0.8rem;
+  background-color: transparent;
+  border: 1px dashed #ccc;
+}
+
+/* Mobile Enhancements */
+@media (max-width: 480px) {
+  .status-badge {
+    font-size: 0.7rem;
+    padding: 3px 8px;
+    border-radius: 5px;
+    max-width: 100px;
+    text-align: center;
+  }
+
+  .status-disabled {
+    font-size: 0.7rem;
+  }
 }

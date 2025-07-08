@@ -1,7 +1,7 @@
 /* src/styles/Footer.css */
 .footer {
     background: #111;
-    padding: 2rem 0;
+    padding: 1rem 0;
     text-align: center;
     text-align: center;
     /* color: white; */
@@ -11,11 +11,14 @@
     justify-content: space-between;
     align-items: center;
 }
-.social-links a {
-    color: var(--light-color);
-    margin-left: 1rem;
-    transition: color 0.3s ease;
+.bi-facebook {
+    color: #3b5998; /* Facebook Blue */
 }
-.social-links a:hover {
-    color: var(--primary-color);
+
+.bi-instagram {
+    color: #e1306c; /* Instagram Pink */
+}
+
+.bi-twitter {
+    color: #1da1f2; /* Twitter Blue */
 }

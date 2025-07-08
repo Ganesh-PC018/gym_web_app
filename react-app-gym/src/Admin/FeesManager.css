@@ -1,4 +1,4 @@
-/* src/styles/FeesManager.css */
+/* 
 
 .fees-container {
   display: flex;
@@ -61,4 +61,121 @@
   margin-top: 1rem;
   color: #1e3c72;
   font-style: italic;
+} */
+
+/* Base container */
+.fees-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 90vh;
+  padding: 1rem;
+  background: linear-gradient(to right, #e0eafc, #cfdef3);
+}
+
+/* Card styles */
+.fees-card {
+  background-color: #ffffff;
+  border-radius: 1rem;
+  padding: 2.5rem 3rem;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+  max-width: 420px;
+  width: 100%;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.fees-card:hover {
+  transform: scale(1.02);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+}
+
+/* Title */
+.fees-title {
+  text-align: center;
+  font-size: 1.75rem;
+  margin-bottom: 2rem;
+  color: #1e3c72;
+  font-weight: 700;
+}
+
+/* Field group */
+.fees-field {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1.5rem;
+}
+
+/* Label */
+.fees-label {
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  color: #333;
+}
+
+/* Input field */
+.fees-input {
+  padding: 0.75rem 1rem;
+  border: 1px solid #ccc;
+  border-radius: 0.5rem;
+  color: #333;
+  font-size: 1rem;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.fees-input:focus {
+  border-color: #1e3c72;
+  box-shadow: 0 0 0 3px rgba(30, 60, 114, 0.2);
+  outline: none;
+}
+
+/* Result / Message */
+.fees-saving {
+  text-align: center;
+  margin-top: 1rem;
+  color: #1e3c72;
+  font-style: italic;
+  font-size: 0.95rem;
+}
+
+/* Mobile Responsive Enhancements */
+@media (max-width: 480px) {
+  .fees-card {
+    padding: 1.5rem 1.5rem;
+    border-radius: 0.75rem;
+  }
+
+  .fees-title {
+    font-size: 1.5rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .fees-label {
+    font-size: 0.95rem;
+  }
+
+  .fees-input {
+    padding: 0.65rem 0.9rem;
+    font-size: 0.95rem;
+  }
+
+  .fees-saving {
+    font-size: 0.85rem;
+  }
+}
+
+.fees-button {
+  width: 100%;
+  padding: 0.75rem;
+  background-color: #1e3c72;
+  color: white;
+  font-weight: bold;
+  border: none;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-top: 1rem;
+}
+
+.fees-button:hover {
+  background-color: #16335e;
 }

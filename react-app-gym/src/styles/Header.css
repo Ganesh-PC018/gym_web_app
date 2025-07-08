@@ -1,4 +1,4 @@
-/* src/styles/Header.css */
+/* 
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
 
 .header {
@@ -23,7 +23,7 @@
   font-weight: 500;
   color: var(--primary-color);
   text-decoration: none;
-  /* font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif; */
+
 }
 .dropdown-item.hover{
   background-color: #2C3335;
@@ -43,4 +43,209 @@
 
 .main-nav a:hover {
   color: var(--primary-color);
+}
+
+
+.menu-toggle {
+  display: none;
+  flex-direction: column;
+  cursor: pointer;
+}
+
+.menu-toggle span {
+  background: var(--light-color);
+  height: 3px;
+  margin: 4px 0;
+  width: 25px;
+  border-radius: 2px;
+}
+
+@media (max-width: 768px) {
+  .main-nav {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: rgba(26, 26, 26, 0.95);
+    flex-direction: column;
+    align-items: center;
+    display: none;
+  }
+
+  .main-nav.open {
+    display: flex;
+  }
+
+  .main-nav ul {
+    flex-direction: column;
+    gap: 1.5rem;
+    padding: 1rem 0;
+  }
+
+  .menu-toggle {
+    display: flex;
+  }
+} */
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+
+/* --- Base Header Styles --- */
+.header {
+    background: rgba(26, 26, 26, 0.8);
+    backdrop-filter: blur(10px);
+    padding: 1rem 0;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 1000;
+    transition: background 0.3s ease;
+}
+
+.header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1rem;
+}
+
+.logo {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #00aaff; /* A more vibrant primary color example */
+    text-decoration: none;
+}
+
+/* --- Main Navigation (Desktop) --- */
+.main-nav ul {
+    display: flex;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    gap: 2.5rem;
+}
+
+.main-nav a {
+    color: #f0f0f0;
+    font-weight: 600;
+    text-decoration: none;
+    transition: color 0.3s ease;
+    position: relative;
+    padding-bottom: 5px;
+}
+
+.main-nav a::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: 0;
+    left: 0;
+    background-color: #00aaff;
+    transition: width 0.3s ease;
+}
+
+.main-nav a:hover {
+    color: #00aaff;
+}
+
+.main-nav a:hover::after {
+    width: 100%;
+}
+
+
+/* --- Profile Dropdown --- */
+/* (Assuming Bootstrap is used, these just provide minor tweaks) */
+.profile-dropdown-container .dropdown-menu {
+    background-color: #222;
+    border: 1px solid #333;
+}
+.profile-dropdown-container .dropdown-item {
+    color: #f0f0f0;
+    transition: background-color 0.2s ease, color 0.2s ease;
+}
+.profile-dropdown-container .dropdown-item:hover {
+    background-color: #00aaff;
+    color: #fff;
+}
+.profile-dropdown-container .dropdown-divider {
+    border-top: 1px solid #444;
+}
+
+/* Initially hide menu toggle on desktop */
+.menu-toggle {
+    display: none;
+}
+
+/* --- Mobile Responsive Design --- */
+@media (max-width: 768px) {
+    .header-right {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+    }
+
+    /* --- Mobile Navigation Menu Styling --- */
+    .main-nav {
+        position: absolute;
+        top: 100%; /* Position right below the header */
+        left: 0;
+        width: 100%;
+        background: rgba(20, 20, 20, 0.98);
+        backdrop-filter: blur(5px);
+        
+        /* Smooth transition for sliding down */
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+    }
+
+    .main-nav.open {
+        max-height: 500px; /* A height large enough to show all items */
+    }
+
+    .main-nav ul {
+        flex-direction: column;
+        width: 100%;
+        padding: 1.5rem 0;
+        align-items: center;
+        gap: 2rem;
+    }
+    
+    .main-nav a:hover::after {
+        width: 0; /* Disable underline hover effect on mobile */
+    }
+
+    /* --- Hamburger Menu Toggle Styling --- */
+    .menu-toggle {
+        display: flex;
+        flex-direction: column;
+        cursor: pointer;
+        width: 25px;
+        height: 20px;
+        justify-content: space-between;
+        position: relative;
+        z-index: 1001; /* Ensure it's above the nav */
+    }
+
+    .menu-toggle span {
+        background: #fff;
+        height: 3px;
+        width: 100%;
+        border-radius: 2px;
+        display: block;
+        transition: transform 0.3s ease, opacity 0.3s ease;
+    }
+
+    /* Animate hamburger to an 'X' */
+    .menu-toggle.open span:nth-child(1) {
+        transform: translateY(8.5px) rotate(45deg);
+    }
+    .menu-toggle.open span:nth-child(2) {
+        opacity: 0;
+    }
+    .menu-toggle.open span:nth-child(3) {
+        transform: translateY(-8.5px) rotate(-45deg);
+    }
 }

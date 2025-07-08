@@ -1,17 +1,30 @@
 import React, { useState, useMemo, useEffect } from 'react';
 import MemberFees from './MemberFees';
 import './ManageForm.css'; // Your new CSS file
-// import './Admin.css'; // Your existing admin styles
 import { addMember, allMembers, deleteMember, updateMember } from '../service/MemberService';
 import FeesManager from './FeesManager.jsx'
 import toast from 'react-hot-toast';
 import InterestedMembersTable from './InterestedMembersTable.jsx'
+// import Particles, { initParticlesEngine } from "@tsparticles/react";
+import PreviousMembers from './PreviousMembers.jsx';
+import AdminLogin from './AdminLogin.jsx';
 const ManageAdmin = () => {
     const [activeView, setActiveView] = useState('dashboard');
     const [members, setMembers] = useState([]);
     const [searchTerm, setSearchTerm] = useState('');
     const [showForm, setShowForm] = useState(false);
     const [showUpdateForm, setshowUpdateForm] = useState(false);
+    const [sidebarOpen, setSidebarOpen] = useState(false);
+    // const [init, setInit] = useState(false);
+    
+    //     // Initialize particle engine
+    //     useEffect(() => {
+    //         initParticlesEngine(async (engine) => {
+    //             await loadSlim(engine);
+    //         }).then(() => {
+    //             setInit(true);
+    //         });
+    //     }, []);
     const [formData, setFormData] = useState({
         name: '',
         contact: '',
@@ -143,7 +156,13 @@ const ManageAdmin = () => {
             toast.error("Problem While Deleting member.");
         }
     };
-
+        const formatDate = (dateString) => {
+        const date = new Date(dateString);
+        const day = date.getDate();
+        const month = date.toLocaleString('en-US', { month: 'long' }); // e.g., June
+        const year = date.getFullYear();
+        return `${day}/${month}/${year}`;
+    };
     const handleEditMember = async (member) => {
         console.log("Member to edit:", member);
         setupdateFormData({
@@ -159,21 +178,28 @@ const ManageAdmin = () => {
     }
 
     return (
+        <>
+        {/* {init && <Particles id="tsparticles" particlesLoaded={particlesLoaded} options={particleOptions} />} */}
+        
+        {/* <button className="sidebar-toggle" onClick={() => setSidebarOpen(!sidebarOpen)}>
+            <i className="bi bi-list"></i>
+        </button> */}
         <div className="admin-container bg-dark text-light" id='admin' style={{ marginTop: '80px' }}>
-            <aside className="admin-sidebar">
+            <aside className={`admin-sidebar ${sidebarOpen ? 'open' : ''}`}>
                 <h3>Admin</h3>
                 <nav className='nav-bar'>
-                    <button onClick={() => setActiveView('dashboard')} className={activeView === 'dashboard' ? 'active' : ''}>Dashboard</button>
-                    <button onClick={() => setActiveView('fees')} className={activeView === 'fees' ? 'active' : ''}>Member Fees</button>
-                    <button onClick={() => setActiveView('updateFees')} className={activeView === 'updateFees' ? 'active' : ''}>Update Fees</button>
-                    <button onClick={() => setActiveView('interestedMembers')} className={activeView === 'interestedMembers' ? 'active' : ''}>interested Members</button>
+                    <button onClick={() => {setActiveView('dashboard'); setSidebarOpen(false)}} className={activeView === 'dashboard' ? 'active' : ''}  style={{zIndex:100}}>Dashboard</button>
+                    <button onClick={() => {setActiveView('fees'); setSidebarOpen(false)}} className={activeView === 'fees' ? 'active' : ''}  style={{zIndex:100}}>Member Fees</button>
+                    <button onClick={() => {setActiveView('updateFees'); setSidebarOpen(false)}} className={activeView === 'updateFees' ? 'active' : ''}  style={{zIndex:100}}>Update Fees</button>
+                    <button onClick={() => {setActiveView('interestedMembers'); setSidebarOpen(false)}} className={activeView === 'interestedMembers' ? 'active' : ''}  style={{zIndex:100}}>interested Members</button>
+                    <button onClick={() => {setActiveView('previousMembers'); setSidebarOpen(false)}} className={activeView === 'previousMembers' ? 'active' : ''}   style={{zIndex:100}}>Previous Members</button>
                 </nav>
             </aside>
 
             <main className="admin-main-content">
                 <header className="admin-header">
                     <h1>Welcome, Admin</h1>
-                    <button className="btn-add-member" onClick={() => setShowForm(true)}>+ Add Member</button>
+                    <button className="btn-add-member" onClick={() => setShowForm(true)} style={{zIndex:100}}>+ Add Member</button>
                 </header>
 
                 {/* ADD MEMBER FORM MODAL */}
@@ -373,8 +399,10 @@ const ManageAdmin = () => {
                 {activeView === 'fees' && <MemberFees members={members} />}
                 {activeView === 'updateFees' && <FeesManager/>}
                 {activeView === 'interestedMembers' && <InterestedMembersTable/>}
+                {activeView === 'previousMembers' && <PreviousMembers/>}
             </main>
         </div>
+        </>
     );
 };
 

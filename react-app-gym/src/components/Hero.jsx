@@ -1,4 +1,3 @@
-// src/components/Hero.js
 import React from 'react';
 import '../styles/Hero.css';
 // Make sure to have a background image at src/assets/hero-background.jpg
@@ -18,3 +17,4 @@ const Hero = () => {
 };
 
 export default Hero;
+

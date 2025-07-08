@@ -1,16 +1,16 @@
-import axios from 'axios'
-
+import axiosWithToken from "../utils/axiosWithToken.js";
 export const addMember = async (memberDetails)=>{
-    return await axios.post(`http://localhost:8080/members`,memberDetails);
+    return await axiosWithToken.post(`/api/members`, memberDetails);
 }
+
 export const updateMember = async (memberDetails)=>{
-    return await axios.put(`http://localhost:8080/members`,memberDetails);
+    return await axiosWithToken.put(`/api/members`,memberDetails);
 }
 
 export const allMembers = async () =>{
-    return await axios.get('http://localhost:8080/members');
+    return await axiosWithToken.get('/api/members');
 }
 
 export const deleteMember = async (memberId) =>{
-    return await axios.delete(`http://localhost:8080/members/${memberId}`);
+    return await axiosWithToken.delete(`/api/members/${memberId}`);
 }

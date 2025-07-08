@@ -1,4 +1,3 @@
-/* src/components/admin/Admin.css */
 
 :root {
   --admin-bg: #1e1e1e;
@@ -23,7 +22,7 @@ body {
   color: var(--primary-text);
 }
 
-/* Layout */
+
 .admin-container {
   display: flex;
   min-height: 100vh;
@@ -73,7 +72,7 @@ body {
   overflow-y: auto;
 }
 
-/* Header */
+
 .admin-header {
   display: flex;
   justify-content: space-between;
@@ -98,7 +97,7 @@ body {
   background-color: #005fa3;
 }
 
-/* Dashboard Cards */
+
 
 .stats-cards {
   display: grid;
@@ -140,7 +139,7 @@ h1,h2,h3,h4,h5,h6,p{
   color: #fff;
 }
 
-/* Forms */
+
 .add-member-form {
   margin-top: 10px;
   display: flex;
@@ -172,7 +171,7 @@ h1,h2,h3,h4,h5,h6,p{
   background-color: #218838;
 }
 
-/* Table Styles */
+
 .details-table,
 .fees-table {
   width: 100%;
@@ -195,7 +194,7 @@ h1,h2,h3,h4,h5,h6,p{
   text-transform: uppercase;
 }
 
-/* Row highlighting */
+
 .fees-table tr.inactive-row {
   background-color: #fcf8e3;
   color: #8a6d3b;
@@ -206,7 +205,7 @@ h1,h2,h3,h4,h5,h6,p{
   background-color: transparent !important;
 }
 
-/* Status Badges */
+
 .status-badge {
   padding: 6px 12px;
   border-radius: 15px;
@@ -238,7 +237,7 @@ h1,h2,h3,h4,h5,h6,p{
   background-color: var(--status-inactive);
 }
 
-/* Toggle Button */
+
 .status-toggle {
   border: none;
   padding: 8px 14px;
@@ -263,7 +262,7 @@ h1,h2,h3,h4,h5,h6,p{
   background-color: var(--status-overdue);
 }
 
-/* Utilities */
+
 .search-bar {
   width: 100%;
   padding: 0.75rem;
@@ -282,4 +281,145 @@ h1,h2,h3,h4,h5,h6,p{
   display: block;
   font-size: 0.75rem;
   color: #999;
+}
+
+/*Added New*/
+
+/* -------------------------------------------
+   Responsive Admin Dashboard for Mobile 📱
+----------------------------------------------*/
+
+@media (max-width: 1024px) {
+  .admin-sidebar {
+    width: 220px;
+    padding: 1rem 0.75rem;
+  }
+
+  .btn-add-member {
+    padding: 8px 16px;
+  }
+
+  .stats-cards {
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 1rem;
+  }
+
+  .admin-main-content {
+    padding: 1.5rem;
+  }
+
+  .add-member-form input,
+  .add-member-form select,
+  .add-member-form button {
+    padding: 10px;
+  }
+}
+
+@media (max-width: 768px) {
+  .admin-container {
+    flex-direction: column;
+  }
+
+  .admin-sidebar {
+    width: 100%;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    overflow-x: auto;
+    padding: 1rem;
+    position: relative;
+    z-index: 100;
+  }
+
+  .admin-sidebar h2 {
+    font-size: 1.2rem;
+    margin: 0;
+    margin-right: auto;
+  }
+
+  .admin-sidebar nav {
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .admin-sidebar nav button {
+    padding: 0.5rem 0.75rem;
+    font-size: 0.85rem;
+    white-space: nowrap;
+  }
+
+  .admin-main-content {
+    padding: 1rem;
+  }
+
+  .admin-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+
+  .btn-add-member {
+    width: 100%;
+    padding: 10px;
+  }
+
+  .stats-cards {
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  }
+
+  .card h3 {
+    font-size: 0.9rem;
+  }
+
+  .card p {
+    font-size: 1.5rem;
+  }
+
+  .add-member-form {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .search-bar {
+    font-size: 0.9rem;
+  }
+
+  .fees-table,
+  .details-table {
+    font-size: 0.85rem;
+  }
+
+  .fees-table th,
+  .fees-table td,
+  .details-table th,
+  .details-table td {
+    padding: 0.75rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .admin-sidebar nav {
+    justify-content: space-around;
+  }
+
+  .admin-sidebar nav button {
+    font-size: 0.75rem;
+    padding: 0.5rem;
+  }
+
+  .card p {
+    font-size: 1.2rem;
+  }
+
+  .status-toggle {
+    width: auto;
+    padding: 6px 10px;
+    font-size: 0.75rem;
+  }
+
+  .status-badge {
+    padding: 4px 8px;
+    font-size: 0.7rem;
+  }
 }
