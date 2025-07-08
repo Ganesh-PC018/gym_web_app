@@ -1,13 +1,19 @@
+# render.yaml - CORRECTED VERSION
+# Deploys a Spring Boot + React monorepo on Render
+
 services:
+  # Service 1: The PostgreSQL Database
   - type: pserv
     name: gym-database
     env: postgres
     plan: free
+    # Note: Free databases on Render expire after 90 days.
 
+  # Service 2: The Spring Boot Backend
   - type: web
     name: gym-backend
     env: java
-    rootDir: gymmanagement
+    rootDir: gymmanagement # Directory for your Spring Boot app
     plan: free
     buildCommand: ./mvnw clean install -DskipTests
     startCommand: java -jar target/gymmanagement-0.0.1-SNAPSHOT.jar
@@ -25,6 +31,7 @@ services:
         fromDatabase:
           name: gym-database
           property: password
+      # Add the following secrets in the Render Dashboard, NOT here.
       - key: SECRET_TOKEN_KEY
         sync: false
       - key: MAIL_USERNAME
@@ -32,9 +39,10 @@ services:
       - key: MAIL_PASSWORD
         sync: false
 
-  - type: static
+  # Service 3: The React Frontend (as a Static Site)
+  - type: static_site # CORRECTED: "static_site" is the right type
     name: gym-frontend
-    rootDir: react-app-gym
+    rootDir: react_app_gym # CORRECTED: to match your folder name
     plan: free
     buildCommand: npm install && npm run build
     publishDir: dist
