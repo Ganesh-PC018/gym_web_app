@@ -43,7 +43,7 @@ services:
         sync: false
 
   # Service 3: The React Frontend (as a Static Site)
-  - type: static
+  - type: static_site
     name: gym-frontend
     rootDir: react_app_gym # The folder where the frontend code is
     plan: free
@@ -56,3 +56,4 @@ services:
           type: web
           name: gym-backend # Must match the name of the backend service
           property: url
+
