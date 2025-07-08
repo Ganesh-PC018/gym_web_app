@@ -1,19 +1,4 @@
 services:
-  - name: gym-database
-    type: pserv
-    runtime: image
-    image:
-      url: postgres:15
-    plan: free
-    startCommand: "echo Starting PostgreSQL"
-    envVars:
-      - key: POSTGRES_DB
-        value: gym_app
-      - key: POSTGRES_USER
-        value: ganesh
-      - key: POSTGRES_PASSWORD
-        value: 4806
-
   - name: gym-backend
     type: web
     plan: free
@@ -23,11 +8,11 @@ services:
     healthCheckPath: /actuator/health
     envVars:
       - key: DB_URL
-        value: jdbc:postgresql://gym-database:5432/gym_app
+        value: jdbc:postgresql://dpg-d1mkoqffte5s73ce7p50-a.oregon-postgres.render.com/gym_app_5i95
       - key: DB_USER
         value: ganesh
       - key: DB_PASSWORD
-        value: 4806
+        value: z5aj8BQkwcncjvdf0lN0Qp7cRU94xPAe
       - key: SECRET_TOKEN_KEY
         sync: false
       - key: MAIL_USERNAME
