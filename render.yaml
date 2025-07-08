@@ -38,14 +38,14 @@ services:
         sync: false
       - key: MAIL_PASSWORD
         sync: false
-
-  # Service 3: The React Frontend (as a Static Site)
-  - type: static_site # CORRECTED: "static_site" is the right type
+#service 3
+  - type: web
     name: gym-frontend
-    rootDir: react_app_gym # CORRECTED: to match your folder name
+    env: node
+    rootDir: react-app-gym
     plan: free
     buildCommand: npm install && npm run build
-    publishDir: dist
+    startCommand: serve -s dist
     envVars:
       - key: VITE_API_URL
         fromService:
