@@ -13,8 +13,8 @@ public class WebConfig {
             @Override
             public void addCorsMappings(CorsRegistry registry) {
                 registry.addMapping("/**")
-                        .allowedOriginPatterns("https://gym-frontend-0i84.onrender.com") // ✅ use patterns, not "*"
-                        .allowedOriginPatterns("https://gym-frontend-3hz0.onrender.com/") // ✅ use patterns, not "*"
+                        .allowedOriginPatterns("https://gym-frontend-0i84.onrender.com")
+                        .allowedOriginPatterns("https://gym-frontend-3hz0.onrender.com/")
                         .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
                         .allowedHeaders("*")
                         .allowCredentials(true);

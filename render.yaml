@@ -29,4 +29,4 @@ services:
     startCommand: npx serve -s dist
     envVars:
       - key: VITE_API_URL
-        value: https://gym-backend.onrender.com
+        value: https://gym-backend-0i84.onrender.com
