@@ -10,7 +10,7 @@ const Hero = () => {
       <div className="container hero-content">
         <h1>Transform Your Body, Elevate Your Life</h1>
         <p>Join a community dedicated to strength, health, and wellness. Your fitness journey starts here.</p>
-        <a href="#classes" className="btn btn-primary">Explore Classes</a>
+        <a href="#classes" className="btn btn-primary my-4">Explore Classes</a>
       </div>
     </section>
   );

@@ -13,7 +13,9 @@ const PreviousMembers = () => {
     const [members, setMembers] = useState([]);
     const [loading, setLoading] = useState(true);
     const [init, setInit] = useState(false);
-
+    const [searchTerm,setSearchTerm] = useState('');
+    const filteredMembers = members.filter(member => member.name.toLowerCase().includes(searchTerm.toLowerCase()) || member.plan.toLowerCase().includes(searchTerm.toLowerCase()))
+   
     // Initialize particle engine
     useEffect(() => {
         initParticlesEngine(async (engine) => {
@@ -117,7 +119,20 @@ const PreviousMembers = () => {
                     <h1 className="display-4 fw-bolder text-light">Our Legacy Members</h1>
                     <p className="lead text-muted text-light">A tribute to the members who have been part of our journey.</p>
                 </motion.div>
-
+                      <div className="input-group mb-3" style={{ width: '80vw', textAlign: 'center', alignItems: 'center', margin: '10px auto', borderRadius: '10px' }}>
+        <input
+          type="text"
+          id="keyword"
+          name="keyword"
+          className="form-control"
+          placeholder="Search member..."
+          onChange={(e) => setSearchTerm(e.target.value)}
+          value={searchTerm}
+        />
+        <span className="input-group-text bg-warning">
+          <i className="bi bi-search"></i>
+        </span>
+      </div>
                 <AnimatePresence>
                     <motion.div
                         className="row g-4"
@@ -125,7 +140,7 @@ const PreviousMembers = () => {
                         initial="hidden"
                         animate="visible"
                     >
-                        {members.map(member => (
+                        {filteredMembers.map(member => (
                             <motion.div key={member.id} className="col-lg-4 col-md-6" variants={itemVariants}>
                                 <div className="card member-card h-100 bg-dark">
                                     <div className="card-body d-flex flex-column">

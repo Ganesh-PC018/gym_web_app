@@ -6,6 +6,8 @@ import { getAllPayments, updatePaymentStatus } from '../service/PaymentService';
 
 const MemberFees = ({ members }) => {
     const [paymentsData, setPaymentsData] = useState({});
+    const [searchTerm, setSearchTerm] = useState('');
+    const filteredMembers = members.filter(member => member.name.toLowerCase().includes(searchTerm.toLowerCase()) || member.plan.toLowerCase().includes(searchTerm.toLowerCase()))
     const formatDate = (dateString) => {
         const date = new Date(dateString);
         const day = date.getDate();
@@ -86,6 +88,20 @@ const MemberFees = ({ members }) => {
     return (
         <div className="fees-details-view">
             <h2>Member Fees Details (Year {new Date().getFullYear()})</h2>
+            <div className="input-group mb-3" style={{ width: '80vw', textAlign: 'center', alignItems: 'center', margin: '10px auto', borderRadius: '10px' }}>
+                <input
+                    type="text"
+                    id="keyword"
+                    name="keyword"
+                    className="form-control"
+                    placeholder="Search member..."
+                    onChange={(e) => setSearchTerm(e.target.value)}
+                    value={searchTerm}
+                />
+                <span className="input-group-text bg-warning">
+                    <i className="bi bi-search"></i>
+                </span>
+            </div>
             <div className="table-container">
                 <table className="fees-table">
                     <thead>
@@ -99,7 +115,7 @@ const MemberFees = ({ members }) => {
                         </tr>
                     </thead>
                     <tbody>
-                        {members.map((member, index) => {
+                        {filteredMembers.map((member, index) => {
                             const joiningDate = new Date(member.joiningDate);
                             // Add a class to the row if the member is inactive
 
@@ -128,7 +144,7 @@ const MemberFees = ({ members }) => {
                                         }
 
                                         // If the member is inactive, disable the button
-                                        console.log("checK ", member);
+                                        // console.log("checK ", member);
                                         if (member.status === false) {
                                             return <td key={month.toISOString()}><span className="status-badge status-na">INACTIVE</span></td>;
                                         }

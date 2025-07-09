@@ -17,6 +17,12 @@
   color: #fff;
 }
 
+html, body {
+  width: 100%;
+  overflow-x: hidden;
+}
+
+
 body {
   font-family: var(--font-family);
   background-color: var(--dark-color);

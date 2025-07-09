@@ -201,7 +201,7 @@
 
 
 /* --- Responsive Mobile Design --- */
-@media (max-width: 488px) {
+@media (max-width: 760px) {
     .add-member-form {
         grid-template-columns: 1fr; /* MOBILE FIX: Stack to a single column */
         gap: 20px; /* MOBILE FIX: Reduce gap for smaller screens */

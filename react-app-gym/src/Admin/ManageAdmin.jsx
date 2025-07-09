@@ -184,7 +184,7 @@ const ManageAdmin = () => {
         {/* <button className="sidebar-toggle" onClick={() => setSidebarOpen(!sidebarOpen)}>
             <i className="bi bi-list"></i>
         </button> */}
-        <div className="admin-container bg-dark text-light" id='admin' style={{ marginTop: '80px' }}>
+        <div className="admin-container bg-dark text-light" id='admin' style={{ marginTop: '66px' }}>
             <aside className={`admin-sidebar ${sidebarOpen ? 'open' : ''}`}>
                 <h3>Admin</h3>
                 <nav className='nav-bar'>

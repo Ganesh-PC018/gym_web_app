@@ -96,25 +96,29 @@
   .pricing-grid {
     display: flex;
     overflow-x: auto;
-    gap: 0.5rem;
-    padding: 1.7rem 0;
+    gap: 2rem;
+    padding: 2rem 1rem;
     scroll-snap-type: x mandatory;
-    scroll-padding: 2rem;
+    scroll-padding: 0 20%;
     -webkit-overflow-scrolling: touch;
-    
   }
 
   .pricing-card {
     scroll-snap-align: center;
-    min-width: 45vw;
-    flex-shrink: 0;
-    margin: 0 0.5rem;
+    flex: 0 0 70%; 
+    min-width: 260px;
+    max-width: 320px;
+    margin: 0 auto;
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
   }
 
   .pricing-grid::after {
     content: "";
-    flex: 0 0 1rem;
+    flex: 0 0 10%;
+  }
+
+  .pricing-section {
+    position: relative;
   }
 
   .pricing-section::before {
@@ -124,10 +128,11 @@
     height: 100%;
     inset: 0;
     pointer-events: none;
-    background: linear-gradient(to right, var(--gray-color) 2%, transparent 8%, transparent 92%, var(--gray-color) 98%);
+    background: linear-gradient(to right, var(--gray-color) 3%, transparent 10%, transparent 90%, var(--gray-color) 97%);
     z-index: 1;
   }
 
+  /* Responsive Typography */
   .pricing-card h3 {
     font-size: 1.25rem;
   }
@@ -141,3 +146,4 @@
     padding: 0.6rem 1.2rem;
   }
 }
+

@@ -1,82 +1,5 @@
-// // src/components/Header.js
-// import React, { useEffect } from 'react';
-// import '../styles/Header.css';
-// import profile from '../assets/profile.png';
-// import { useAuth } from "../context/AuthContext"; // ✅
-// import { useNavigate, Link } from "react-router-dom";
-
-// const Header = () => {
-// const { admin } = useAuth();
-// const navigate = useNavigate();
-// const { logout } = useAuth();
-// const handleLogOut = (e) => {
-//   e.preventDefault();
-//   logout(); // Clears admin session from context/localStorage/etc.
-//   navigate('/');
-// };
-//   // Redirect to login if profile is clicked and not logged in
-//   const handleProfileClick = () => {
-//     // e.preventDefault();
-//     if (!admin) {
-//       navigate("/admin-login");
-//     }
-   
-//   };
-
-//   return (
-//     <header className="header">
-//       <div className="container header-container">
-//         <Link to="/" className="logo">GYM-CRAZE</Link>
-//         <nav className="main-nav">
-//           <ul>
-//             <li><a href="/#about">About</a></li>
-//             <li><a href="/#classes">Classes</a></li>
-//             <li><a href="/#pricing">Pricing</a></li>
-//             <li><a href="/#contact">Contact</a></li>
-//           </ul>
-//         </nav>
-
-//         <ul className="navbar-nav ms-auto ms-md-0 me-3 me-lg-4">
-//           <li className="nav-item dropdown">
-//             <a
-//               href="#"
-//               className="nav-link dropdown-toggle"
-//               id="navbarDropdown"
-//               role="button"
-//               data-bs-toggle="dropdown"
-//               aria-expanded="true"
-//               onClick={handleProfileClick}
-//             >
-//               <img src={profile}  alt="Profile" width={32} height={32} />
-//             </a>
-
-//             {admin && (
-//               <ul className="dropdown-menu dropdown-menu-end" id="drop" aria-labelledby="navbarDropdown">
-//                 <li>
-//                   <Link to="/admin" className="dropdown-item">Dashboard</Link>
-//                 </li>
-//                 <li>
-//                   <Link to="/admin" className="dropdown-item">Fees Update</Link>
-//                 </li>
-//                 <li>
-//                   <Link to="/admin" className="dropdown-item">Peoples Reached</Link>
-//                 </li>
-//                 <li><hr className="dropdown-divider" /></li>
-//                 <li>
-//                   <a href="#" className="dropdown-item" onClick={handleLogOut}>Log out</a>
-//                 </li>
-//               </ul>
-//             )}
-//           </li>
-//         </ul>
-//       </div>
-//     </header>
-//   );
-// };
-
-// export default Header;
-
-import React, { useState } from 'react';
+// src/components/Header.js
+import React, { useState, useEffect, useRef } from 'react';
 import '../styles/Header.css';
 import profile from '../assets/profile.png';
 import { useAuth } from "../context/AuthContext";
@@ -86,30 +9,50 @@ const Header = () => {
   const { admin, logout } = useAuth();
   const navigate = useNavigate();
   const [menuOpen, setMenuOpen] = useState(false);
+  const [isDropdownOpen, setDropdownOpen] = useState(false);
+  const dropdownRef = useRef(null);
 
   const handleLogOut = (e) => {
     e.preventDefault();
     logout();
+    setDropdownOpen(false); // Close dropdown on logout
     navigate('/');
   };
 
+  // Toggle dropdown and redirect if not logged in
   const handleProfileClick = () => {
     if (!admin) {
       navigate("/admin-login");
+    } else {
+      setDropdownOpen(prev => !prev); // Toggle dropdown visibility
     }
   };
+
+  // Close dropdown when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        setDropdownOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
+
 
   return (
     <header className="header">
       <div className="container header-container">
+        <Link to="/" className="logo">GYM-CRAZE</Link>
 
         {/* Hamburger icon for mobile */}
-        <div className="menu-toggle" onClick={() => setMenuOpen(!menuOpen)}>
+        <div className={`menu-toggle ${menuOpen ? 'open' : ''}`} onClick={() => setMenuOpen(!menuOpen)}>
           <span></span>
           <span></span>
           <span></span>
         </div>
-        <Link to="/" className="logo">GYM-CRAZE</Link>
 
         <nav className={`main-nav ${menuOpen ? 'open' : ''}`}>
           <ul>
@@ -120,32 +63,33 @@ const Header = () => {
           </ul>
         </nav>
 
-        {/* Profile dropdown */}
-        <ul className="navbar-nav ms-auto ms-md-0 me-3 me-lg-4">
-          <li className="nav-item dropdown">
-            <a
-              href="#"
-              className="nav-link dropdown-toggle"
-              id="navbarDropdown"
-              role="button"
-              data-bs-toggle="dropdown"
-              aria-expanded="true"
-              onClick={handleProfileClick}
-            >
-              <img src={profile} alt="Profile" width={32} height={32} />
-            </a>
+        {/* Profile Dropdown */}
+        <div className="profile-dropdown-container" ref={dropdownRef}>
+          <button
+            className="profile-button"
+            onClick={handleProfileClick}
+            aria-haspopup="true"
+            aria-expanded={isDropdownOpen}
+          >
+            <img src={profile} alt="Profile" width={38} height={38} />
+          </button>
 
-            {admin && (
-              <ul className="dropdown-menu dropdown-menu-end" id="drop" aria-labelledby="navbarDropdown">
-                <li><Link to="/admin" className="dropdown-item">Dashboard</Link></li>
-                <li><Link to="/admin" className="dropdown-item">Fees Update</Link></li>
-                <li><Link to="/admin" className="dropdown-item">Peoples Reached</Link></li>
-                <li><hr className="dropdown-divider" /></li>
-                <li><a href="#" className="dropdown-item" onClick={handleLogOut}>Log out</a></li>
-              </ul>
-            )}
-          </li>
-        </ul>
+          {admin && (
+            <div className={`profile-dropdown ${isDropdownOpen ? 'show' : ''}`} aria-labelledby="navbarDropdown">
+              <div className="dropdown-header">
+                <span className="dropdown-username">Admin</span>
+                <small>Welcome back!</small>
+              </div>
+              <Link to="/admin" className="dropdown-item" onClick={() => setDropdownOpen(false)}>Dashboard</Link>
+              <Link to="/admin" className="dropdown-item" onClick={() => setDropdownOpen(false)}>Fees Update</Link>
+              <Link to="/admin" className="dropdown-item" onClick={() => setDropdownOpen(false)}>Peoples Reached</Link>
+              <div className="dropdown-divider"></div>
+              <a href="#" className="dropdown-item logout" onClick={handleLogOut}>
+                <i className="fas fa-sign-out-alt"></i> Log Out
+              </a>
+            </div>
+          )}
+        </div>
       </div>
     </header>
   );
