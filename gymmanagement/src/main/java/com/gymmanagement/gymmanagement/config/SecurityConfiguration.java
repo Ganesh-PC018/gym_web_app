@@ -65,8 +65,8 @@ public class SecurityConfiguration {
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
-        configuration.setAllowedOrigins(List.of("https://gym-backend-0i84.onrender.com"));
-        configuration.setAllowedOrigins(List.of("https://gym-backend-3hz0.onrender.com"));
+        configuration.setAllowedOrigins(List.of("https://gym-frontend-0i84.onrender.com"));
+        configuration.setAllowedOrigins(List.of("https://gym-frontend-3hz0.onrender.com"));
         configuration.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
         configuration.setAllowedHeaders(List.of("*"));
         configuration.setAllowCredentials(true); // important for cookies, tokens
