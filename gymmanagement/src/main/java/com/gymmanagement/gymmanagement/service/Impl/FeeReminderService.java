@@ -21,7 +21,6 @@ public class FeeReminderService {
     private JavaMailSender mailSender;
 
     @Scheduled(cron = "0 0 9 * * *") // Every day at 9 AM
-//    @Scheduled(fixedRate = 60000) // Every day at 1 minute
     public void sendFeeReminderEmails() {
         List<MemberDetails> unpaidMembers = memberRepository.findUnpaidMembers();
 

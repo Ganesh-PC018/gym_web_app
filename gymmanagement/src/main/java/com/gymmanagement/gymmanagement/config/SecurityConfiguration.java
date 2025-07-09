@@ -52,7 +52,7 @@ public class SecurityConfiguration {
                 .csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/actuator/health").permitAll()
-                        .requestMatchers( "/fees/**","/api/interested", "/admin-login", "/api/auth/login", "/api/auth/login/**", "/api/public/**","/api/login/check/").permitAll()
+                        .requestMatchers( "/fees/**","/api/interested", "/admin-login", "/api/auth/login", "/api/auth/login/**", "/api/public/**").permitAll()
                         .requestMatchers("/api/payments/**", "/api/members/**", "/api/admin/**","/api/admin").hasRole("ADMIN")
                         .anyRequest().authenticated()
                 )
