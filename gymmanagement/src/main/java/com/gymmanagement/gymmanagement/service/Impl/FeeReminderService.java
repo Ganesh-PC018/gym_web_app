@@ -20,7 +20,7 @@ public class FeeReminderService {
     @Autowired
     private JavaMailSender mailSender;
 
-    @Scheduled(fixedDelay = 1000000) // Every day at 9 AM
+    @Scheduled(cron = "0 0 9 * * *") // Every day at 9 AM
     public void sendFeeReminderEmails() {
         List<MemberDetails> unpaidMembers = memberRepository.findUnpaidMembers();
 
